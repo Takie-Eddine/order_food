@@ -21,8 +21,8 @@
     </style>
 
     <!-- Scripts -->
-    <link href="{{asset('build/assets/app.f1574835.css')}}" rel="stylesheet" />
-    <script src="{{asset('build/assets/app.f82d2cb7.js')}}"></script>
+    <link href="{{asset('assets/css/app.f1574835.css')}}" rel="stylesheet" />
+    <script src="{{asset('assets/js/app.f82d2cb7.js')}}"></script>
 
 </head>
 
