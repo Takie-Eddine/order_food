@@ -19,9 +19,11 @@
             display: none;
         }
     </style>
-    
+
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{asset('build/assets/app.f1574835.css')}}" rel="stylesheet" />
+    <script src="{{asset('build/assets/app.f82d2cb7.js')}}"></script>
+
 </head>
 
 <body>
