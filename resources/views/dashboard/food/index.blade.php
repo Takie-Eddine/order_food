@@ -92,6 +92,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{$meals->withQueryString()->links()}}
                     </div>
                 </div>
             </div>

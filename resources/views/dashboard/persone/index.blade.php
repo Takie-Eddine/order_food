@@ -79,6 +79,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{$persones->withQueryString()->links()}}
                     </div>
                 </div>
             </div>

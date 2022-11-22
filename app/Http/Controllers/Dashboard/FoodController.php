@@ -10,7 +10,7 @@ class FoodController extends Controller
 {
     public function index(){
 
-        $meals = Food::all();
+        $meals = Food::paginate(7);
 
         return view('dashboard.food.index' ,compact('meals'));
     }

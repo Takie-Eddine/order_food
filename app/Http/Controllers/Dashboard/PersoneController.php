@@ -11,7 +11,7 @@ class PersoneController extends Controller
 
     public function index(){
 
-        $persones = Persone::all();
+        $persones = Persone::paginate(7);
 
         return view('dashboard.persone.index' ,compact('persones'));
     }
