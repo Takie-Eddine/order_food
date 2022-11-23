@@ -171,7 +171,7 @@ class HomeController extends Controller
         }catch(Exception $ex){
             DB::rollback();
 
-            //return $ex;
+            return $ex;
         }
 
 
