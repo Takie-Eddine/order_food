@@ -102,9 +102,6 @@ class HomeController extends Controller
                         ]);
 
                         $order_up = Order::find($ordertest->order_id);
-
-                        return $order_up;
-
                         $order_up->total = $order_up->total+$request->price;
                         $order_up->save();
 
