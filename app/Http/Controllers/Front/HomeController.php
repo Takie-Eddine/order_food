@@ -58,7 +58,7 @@ class HomeController extends Controller
 
             $ordertest = OrderDetails::where( 'reference' , $request->refrence )->first();
 
-            return $ordertest ;
+
 
 
 
@@ -102,6 +102,8 @@ class HomeController extends Controller
                         ]);
 
                         $order = Order::findOrFail($ordertest->id);
+
+                        return $order;
 
                         $order->total = $order->total+$request->price;
                         $order->save();
