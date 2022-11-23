@@ -99,7 +99,7 @@ class HomeController extends Controller
                             'persone_id' => $value,
                         ]);
 
-                        $order = Order::findOrFail($ordertest->id);
+                        $order = Order::find($ordertest->id);
 
                         $order->total = $order->total+$request->price;
                         $order->save();
@@ -145,7 +145,7 @@ class HomeController extends Controller
                             'persone_id' => 0,
                         ]);
 
-                        $order = Order::findOrFail($ordertest->id);
+                        $order = Order::find($ordertest->id);
 
                         $order->total = $order->total+$request->price;
                         $order->save();
