@@ -56,10 +56,12 @@ class HomeController extends Controller
             }
 
 
-            $ordertest = OrderDetails::where('reference',$request->refrence)->first();
+            $ordertest = OrderDetails::where( 'reference' , $request->refrence )->first();
+
+            return $ordertest ;
 
 
-            if ($request->persone) {
+
                 if (!$ordertest) {
 
                     $order = Order::create([
@@ -107,11 +109,6 @@ class HomeController extends Controller
                     }
 
                 }
-
-            }
-
-
-
 
             DB::commit();
 
