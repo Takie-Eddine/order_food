@@ -11,6 +11,8 @@ use App\Models\Persone;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
@@ -30,76 +32,140 @@ class HomeController extends Controller
 
         try{
             $request->validate([
-                'refrence' => 'required',
-                'food' => 'required|exists:food,id',
+                //'refrence' => 'required',
+                'food' => 'required',
                 'date' => 'required|date',
                 'persone' => 'nullable|array|min:1|exists:persones,id',
                 'price' => 'required|integer',
                 'delivery' => 'nullable|integer',
 
             ]);
+
+            $request->merge(['refrence' => Str::slug($request->date)]);
+
             DB::beginTransaction();
 
-            $count = count($request->persone);
+            if ($request->persone) {
+                $count = count($request->persone);
+            }else{
+                $count = 1;
+            }
+
+            if (!$request->delivery) {
+                $request->delivery = 0;
+            }
+
 
             $ordertest = OrderDetails::where('reference',$request->refrence)->first();
 
 
+            if ($request->persone) {
+                if (!$ordertest) {
 
-            if (!$ordertest) {
+                    $order = Order::create([
+                        'total' => 0,
+                    ]);
 
-                $order = Order::create([
-                    'total' => 0,
-                ]);
+                    foreach ($request->persone as $value) {
+                        $order_details = OrderDetails::create([
+                            'order_id' => $order->id,
+                            'reference' => $request->refrence,
+                            'food' => $request->food,
+                            'created_at' => $request->date,
+                            'price' => ($request->price/$count),
+                            'persone_id' => $value,
+                        ]);
+                    }
 
-                foreach ($request->persone as $value) {
-                    $order_details = OrderDetails::create([
+
+
+                    $order_delevery = OrderDelivery::create([
                         'order_id' => $order->id,
-                        'reference' => $request->refrence,
-                        'food_id' => $request->food,
-                        'created_at' => $request->date,
-                        'price' => ($request->price/$count),
-                        'persone_id' => $value,
+                        'delivery' => $request->delivery,
                     ]);
+
+                    $order->update([
+                        'total' => ($request->price + $order_delevery->delivery),
+                    ]);
+
+                }else{
+                    foreach ($request->persone as $value) {
+                        $order_details = OrderDetails::create([
+                            'order_id' => $ordertest->order_id,
+                            'reference' => $request->refrence,
+                            'food' => $request->food,
+                            'created_at' => $request->date,
+                            'price' => ($request->price/$count),
+                            'persone_id' => $value,
+                        ]);
+
+                        $order = Order::findOrFail($ordertest->id);
+
+                        $order->total = $order->total+$request->price;
+                        $order->save();
+
+                    }
+
                 }
-
-                $order_delevery = OrderDelivery::create([
-                    'order_id' => $order->id,
-                    'delivery' => $request->delivery,
-                ]);
-
-                $order->update([
-                    'total' => ($request->price + $order_delevery->delivery),
-                ]);
-
             }else{
-                foreach ($request->persone as $value) {
-                    $order_details = OrderDetails::create([
-                        'order_id' => $ordertest->order_id,
-                        'reference' => $request->refrence,
-                        'food_id' => $request->food,
-                        'created_at' => $request->date,
-                        'price' => ($request->price/$count),
-                        'persone_id' => $value,
+                if (!$ordertest) {
+
+                    $order = Order::create([
+                        'total' => 0,
                     ]);
 
-                    $order = Order::findOrFail($ordertest->id);
 
-                    $order->total = $order->total+$request->price;
-                    $order->save();
+                        $order_details = OrderDetails::create([
+                            'order_id' => $order->id,
+                            'reference' => $request->refrence,
+                            'food' => $request->food,
+                            'created_at' => $request->date,
+                            'price' => ($request->price/$count),
+                            'persone_id' => 0,
+                        ]);
+
+
+                    $order_delevery = OrderDelivery::create([
+                        'order_id' => $order->id,
+                        'delivery' => $request->delivery,
+                    ]);
+
+                    $order->update([
+                        'total' => ($request->price + $order_delevery->delivery),
+                    ]);
+
+                }else{
+
+                        $order_details = OrderDetails::create([
+                            'order_id' => $ordertest->order_id,
+                            'reference' => $request->refrence,
+                            'food' => $request->food,
+                            'created_at' => $request->date,
+                            'price' => ($request->price/$count),
+                            'persone_id' => 0,
+                        ]);
+
+                        $order = Order::findOrFail($ordertest->id);
+
+                        $order->total = $order->total+$request->price;
+                        $order->save();
+
+
+
+                    // OrderDelivery::create([
+                    //     'order_id' => $ordertest->order_id,
+                    //     'delivery' => $request->delivery,
+                    // ]);
 
                 }
-
-                // OrderDelivery::create([
-                //     'order_id' => $ordertest->order_id,
-                //     'delivery' => $request->delivery,
-                // ]);
-
             }
+
+
+
 
             DB::commit();
 
-
+            Alert::success( 'Order Registred');
             return redirect()->back()->with(['success' => 'Order Registred']);
 
         }catch(Exception $ex){

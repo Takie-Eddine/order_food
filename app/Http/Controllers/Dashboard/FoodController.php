@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FoodController extends Controller
 {
@@ -26,7 +27,7 @@ class FoodController extends Controller
             'name' => $request->name,
             'price' => $request->price,
         ]);
-
+        Alert::success( 'Meal Registred');
         return redirect()->back()->with(['success' => 'Meal Registred']);
     }
 
@@ -36,7 +37,7 @@ class FoodController extends Controller
         $meal = Food::findOrFail($id);
 
         $meal->delete();
-
+        Alert::success( 'Meal deleted');
         return redirect()->back()->with(['success' => 'User deleted']);
 
     }
@@ -65,7 +66,7 @@ class FoodController extends Controller
             'name' => $request->name,
             'price' => $request->price,
         ]);
-
+        Alert::success( 'Meal Updated');
         return redirect()->route('dashboard.food')->with(['success' => 'Meal Updated']);
 
     }

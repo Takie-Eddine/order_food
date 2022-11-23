@@ -67,14 +67,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="label" for="food">الوجبة </label>
-                                                        <select class="form-control" name="food" id="">
-                                                            <option value="">Choose</option>
-                                                            @isset($meals)
-                                                                @foreach ($meals as $meal)
-                                                                    <option value="{{$meal->id}}">{{$meal->name}}</option>
-                                                                @endforeach
-                                                            @endisset
-                                                        </select>
+                                                        <input type="text" class="form-control" name="food" id="food" placeholder="" value ="{{old('food')}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -161,6 +154,8 @@
 			</div>
 		</div>
 	</section>
+
+        @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="{{asset('assets/persone/js/jquery.min.js')}}"></script>

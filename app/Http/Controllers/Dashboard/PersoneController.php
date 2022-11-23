@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Persone;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class PersoneController extends Controller
 {
@@ -28,7 +30,8 @@ class PersoneController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->back()->with(['success' => 'User Registred']);
+        Alert::success( 'User Registred');
+        return redirect()->back();
     }
 
 
@@ -37,7 +40,7 @@ class PersoneController extends Controller
         $persone = Persone::findOrFail($id);
 
         $persone->delete();
-
+        Alert::success( 'User deleted');
         return redirect()->back()->with(['success' => 'User deleted']);
 
     }
