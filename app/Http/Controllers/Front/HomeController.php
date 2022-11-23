@@ -101,12 +101,12 @@ class HomeController extends Controller
                             'persone_id' => $value,
                         ]);
 
-                        $order = Order::find($ordertest->id);
+                        $order_up = Order::find($ordertest->order_id);
 
-                        return $order;
+                        return $order_up;
 
-                        $order->total = $order->total+$request->price;
-                        $order->save();
+                        $order_up->total = $order_up->total+$request->price;
+                        $order_up->save();
 
                     }
 
