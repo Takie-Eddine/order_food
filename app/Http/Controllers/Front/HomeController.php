@@ -165,13 +165,13 @@ class HomeController extends Controller
 
             DB::commit();
 
-            Alert::success( 'Order Registred');
+            //Alert::success( 'Order Registred');
             return redirect()->back()->with(['success' => 'Order Registred']);
 
         }catch(Exception $ex){
             DB::rollback();
 
-            return $ex;
+            //return $ex;
         }
 
 

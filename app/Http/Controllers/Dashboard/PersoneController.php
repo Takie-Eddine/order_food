@@ -30,8 +30,8 @@ class PersoneController extends Controller
             'name' => $request->name,
         ]);
 
-        Alert::success( 'User Registred');
-        return redirect()->back();
+        //Alert::success( 'User Registred');
+        return redirect()->back()->with(['success' => 'User Registred']);
     }
 
 
@@ -40,7 +40,7 @@ class PersoneController extends Controller
         $persone = Persone::findOrFail($id);
 
         $persone->delete();
-        Alert::success( 'User deleted');
+        //Alert::success( 'User deleted');
         return redirect()->back()->with(['success' => 'User deleted']);
 
     }

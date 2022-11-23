@@ -37,7 +37,7 @@ class FoodController extends Controller
         $meal = Food::findOrFail($id);
 
         $meal->delete();
-        Alert::success( 'Meal deleted');
+        //Alert::success( 'Meal deleted');
         return redirect()->back()->with(['success' => 'User deleted']);
 
     }
@@ -66,7 +66,7 @@ class FoodController extends Controller
             'name' => $request->name,
             'price' => $request->price,
         ]);
-        Alert::success( 'Meal Updated');
+        //Alert::success( 'Meal Updated');
         return redirect()->route('dashboard.food')->with(['success' => 'Meal Updated']);
 
     }
