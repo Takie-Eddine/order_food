@@ -99,7 +99,7 @@ class HomeController extends Controller
                             'persone_id' => $value,
                         ]);
 
-                        $order = Order::find($ordertest->id);
+                        $order = Order::findOrFail($ordertest->id);
 
                         $order->total = $order->total+$request->price;
                         $order->save();
@@ -107,57 +107,7 @@ class HomeController extends Controller
                     }
 
                 }
-            }else{
-                if (!$ordertest) {
 
-                    $order = Order::create([
-                        'total' => 0,
-                    ]);
-
-
-                        $order_details = OrderDetails::create([
-                            'order_id' => $order->id,
-                            'reference' => $request->refrence,
-                            'food' => $request->food,
-                            'created_at' => $request->date,
-                            'price' => ($request->price/$count),
-                            'persone_id' => 0,
-                        ]);
-
-
-                    $order_delevery = OrderDelivery::create([
-                        'order_id' => $order->id,
-                        'delivery' => $request->delivery,
-                    ]);
-
-                    $order->update([
-                        'total' => ($request->price + $order_delevery->delivery),
-                    ]);
-
-                }else{
-
-                        $order_details = OrderDetails::create([
-                            'order_id' => $ordertest->order_id,
-                            'reference' => $request->refrence,
-                            'food' => $request->food,
-                            'created_at' => $request->date,
-                            'price' => ($request->price/$count),
-                            'persone_id' => 0,
-                        ]);
-
-                        $order = Order::find($ordertest->id);
-
-                        $order->total = $order->total+$request->price;
-                        $order->save();
-
-
-
-                    // OrderDelivery::create([
-                    //     'order_id' => $ordertest->order_id,
-                    //     'delivery' => $request->delivery,
-                    // ]);
-
-                }
             }
 
 
