@@ -41,8 +41,7 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    @include('sweetalert::alert')
-    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
     <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <script src="{{asset('assets/vendors/js/vendor.bundle.addons.js')}}"></script>
     <!-- endinject -->
