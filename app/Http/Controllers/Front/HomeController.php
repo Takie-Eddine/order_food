@@ -101,7 +101,7 @@ class HomeController extends Controller
                             'persone_id' => $value,
                         ]);
 
-                        $order = Order::findOrFail($ordertest->id);
+                        $order = Order::find($ordertest->id);
 
                         return $order;
 
