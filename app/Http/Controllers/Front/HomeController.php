@@ -51,12 +51,9 @@ class HomeController extends Controller
                 $count = 1;
             }
 
-            if (!$request->delivery) {
-                $request->delivery = 0;
-            }
-
 
             $ordertest = OrderDetails::where( 'reference' , $request->refrence )->first();
+
                 if (!$ordertest) {
 
                     $order = Order::create([
@@ -74,11 +71,6 @@ class HomeController extends Controller
                         ]);
                     }
 
-                    // $order_delevery = OrderDelivery::create([
-                    //     'order_id' => $order->id,
-                    //     'delivery' => $request->delivery,
-                    // ]);
-
                     $order->update([
                         'total' => ($request->price),
                     ]);
@@ -95,7 +87,7 @@ class HomeController extends Controller
                         ]);
 
                         $order_up = Order::find($ordertest->order_id);
-                        $order_up->total = $order_up->total+$request->price;
+                        $order_up->total = $order_up->total+$request->price/$count;
                         $order_up->save();
 
                     }
