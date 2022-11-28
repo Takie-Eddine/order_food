@@ -45,6 +45,7 @@
                                     <th>#</th>
                                     <th>Date</th>
                                     <th>Description</th>
+                                    <th>Type</th>
                                     <th>Price</th>
                                     <th>Old</th>
                                     <th>New</th>
@@ -57,6 +58,7 @@
                                         <td>{{$expence->id}}</td>
                                         <td>{{$expence->created_at}}</td>
                                         <td>{{$expence->description}}</td>
+                                        <td>{{$expence->type}}</td>
                                         <td>{{$expence->price}}</td>
                                         <td>{{$expence->old}}</td>
                                         <td>{{$expence->total}}</td>
