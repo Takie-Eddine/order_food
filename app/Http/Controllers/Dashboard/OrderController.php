@@ -15,9 +15,12 @@ class OrderController extends Controller
 {
     public function index(){
 
-        $orders = Order::paginate();
+        $request = request();
 
-        return view('dashboard.order.index',compact('orders'));
+        $orders = Order::filter($request->query())->paginate(7);
+        $total = Order::selectRaw('SUM(total) as total')->filter($request->query())->first();
+
+        return view('dashboard.order.index',compact('orders','total'));
     }
 
 

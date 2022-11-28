@@ -69,7 +69,7 @@
                                 @foreach ($persones as $persone)
                                     <tr>
                                         <td>{{$persone->id}}</td>
-                                        <td>{{$persone->name}}</td>
+                                        <td><a href="{{route('dashboard.order.person.show', $persone->name)}}">{{$persone->name}}</a></td>
                                         <td>
                                             <form action="{{route('dashboard.persone.delete',$persone->id)}}" method="POST">
                                                 @method('delete')
