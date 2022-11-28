@@ -64,7 +64,7 @@
                                 <div class="d-flex">
                                     <div class="wrapper">
                                         <h3 class="mb-0 font-weight-semibold">{{$meals->total ?? 0}} TL</h3>
-                                        <h5 class="mb-0 font-weight-medium text-primary">Food</h5>
+                                        <h5 class="mb-0 font-weight-medium text-primary"><a href="{{route('dashboard.order')}}"> Food </a></h5>
                                     </div>
                                     {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
                                         <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
@@ -75,7 +75,7 @@
                                 <div class="d-flex">
                                     <div class="wrapper">
                                         <h3 class="mb-0 font-weight-semibold">{{$cash_in->total ?? 0}} TL</h3>
-                                        <h5 class="mb-0 font-weight-medium text-primary">Cash In</h5>
+                                        <h5 class="mb-0 font-weight-medium text-primary"><a href="{{route('dashboard.expences')}}"> Cash In </a></h5>
                                     </div>
                                     {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
                                         <canvas height="50" width="100" id="stats-line-graph-2"></canvas>
@@ -86,7 +86,7 @@
                                 <div class="d-flex">
                                     <div class="wrapper">
                                         <h3 class="mb-0 font-weight-semibold">{{$cash_out->total ?? 0}} TL</h3>
-                                        <h5 class="mb-0 font-weight-medium text-primary">Cash Out</h5>
+                                        <h5 class="mb-0 font-weight-medium text-primary"><a href="{{route('dashboard.expences')}}"> Cash Out </a> </h5>
                                     </div>
                                     {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
                                         <canvas height="50" width="100" id="stats-line-graph-3"></canvas>
