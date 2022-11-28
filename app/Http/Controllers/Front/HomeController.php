@@ -35,9 +35,9 @@ class HomeController extends Controller
                 //'refrence' => 'required',
                 'food' => 'required',
                 'date' => 'required|date',
-                'persone' => 'nullable|array|min:1|exists:persones,id',
+                'persone' => 'nullable|array|min:1|exists:persones,name',
                 'price' => 'required|integer',
-                'delivery' => 'nullable|integer',
+                //'delivery' => 'nullable|integer',
 
             ]);
 
@@ -57,11 +57,6 @@ class HomeController extends Controller
 
 
             $ordertest = OrderDetails::where( 'reference' , $request->refrence )->first();
-
-
-
-
-
                 if (!$ordertest) {
 
                     $order = Order::create([
@@ -75,19 +70,17 @@ class HomeController extends Controller
                             'food' => $request->food,
                             'created_at' => $request->date,
                             'price' => ($request->price/$count),
-                            'persone_id' => $value,
+                            'persone' => $value,
                         ]);
                     }
 
-
-
-                    $order_delevery = OrderDelivery::create([
-                        'order_id' => $order->id,
-                        'delivery' => $request->delivery,
-                    ]);
+                    // $order_delevery = OrderDelivery::create([
+                    //     'order_id' => $order->id,
+                    //     'delivery' => $request->delivery,
+                    // ]);
 
                     $order->update([
-                        'total' => ($request->price + $order_delevery->delivery),
+                        'total' => ($request->price),
                     ]);
 
                 }else{
@@ -98,7 +91,7 @@ class HomeController extends Controller
                             'food' => $request->food,
                             'created_at' => $request->date,
                             'price' => ($request->price/$count),
-                            'persone_id' => $value,
+                            'persone' => $value,
                         ]);
 
                         $order_up = Order::find($ordertest->order_id);
@@ -111,20 +104,13 @@ class HomeController extends Controller
 
             DB::commit();
 
-            //Alert::success( 'Order Registred');
             return redirect()->back()->with(['success' => 'Order Registred']);
 
         }catch(Exception $ex){
             DB::rollback();
-
-            return $ex;
+            return redirect()->back()->with(['errors' => 'There is problem contact the smartest one ']);
         }
-
-
-
-
-
-
-
     }
+
+
 }

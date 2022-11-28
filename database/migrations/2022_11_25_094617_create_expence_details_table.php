@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_details', function (Blueprint $table) {
+        Schema::create('expence_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
-            $table->string('persone');
-            $table->string('reference');
-            $table->string('food');
+            // $table->foreignId('expence_id')->constrained('expences')->cascadeOnDelete();
+            $table->enum('type',['cash_in','cash_out']);
             $table->float('price');
+            $table->text('description')->nullable();
+            $table->float('old')->default(0.00);
+            $table->float('total')->default(0.00);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_details');
+        Schema::dropIfExists('expence_details');
     }
 };

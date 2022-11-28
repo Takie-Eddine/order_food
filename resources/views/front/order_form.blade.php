@@ -34,7 +34,10 @@
 									<!--<h3 class="mb-4">Get in touch</h3>-->
 									<br>
 										<br>
-									<div id="form-message-warning" class="mb-4"></div>
+									<div id="form-message-warning" class="mb-4">
+
+                                    </div>
+
                                     @if ($errors->any())
                                         <div class="alert alert-danger">
                                             <h5>Error Occured!</h5>
@@ -45,6 +48,9 @@
                                             </ul>
                                         </div>
                                     @endif
+
+                                    @include('alerts.errors')
+                                    @include('alerts.success')
 									<form action="{{route('home.store')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
 										<div class="row">
@@ -77,7 +83,7 @@
                                                             <option value="">Choose</option>
                                                             @isset($persones)
                                                                 @foreach ($persones as $persones)
-                                                                    <option value="{{$persones->id}}">{{$persones->name}}</option>
+                                                                    <option value="{{$persones->name}}">{{$persones->name}}</option>
                                                                 @endforeach
                                                             @endisset
                                                         </select>
@@ -90,12 +96,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-12">
+                                                {{-- <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="label" for="email">التوصيل</label>
                                                         <input type="text" class="form-control" name="delivery" id="" placeholder="" value = "{{old('delivery')}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
 
 

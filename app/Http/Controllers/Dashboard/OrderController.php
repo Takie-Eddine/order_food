@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     public function index(){
 
-        $orders = Order::all();
+        $orders = Order::paginate();
 
         return view('dashboard.order.index',compact('orders'));
     }
@@ -23,6 +23,12 @@ class OrderController extends Controller
 
 
     public function details($id){
+
+        $order_details = OrderDetails::where('order_id',$id)->paginate();
+        //$order_delivrey = OrderDelivery::where('order_id',$id)->first();
+        $order = Order::find($id);
+
+        return view('dashboard.order.details',compact('order_details','order'));
 
     }
 
@@ -35,14 +41,14 @@ class OrderController extends Controller
 
             $order = Order::findOrFail($id);
             $order_details = OrderDetails::where('order_id',$id)->get();
-            $order_delivrey = OrderDelivery::where('order_id',$id)->first();
+            //$order_delivrey = OrderDelivery::where('order_id',$id)->first();
 
 
             DB::beginTransaction();
             foreach ($order_details as $value) {
                 $value->delete();
             }
-            $order_delivrey->delete();
+            //$order_delivrey->delete();
             $order->delete();
 
             DB::commit();

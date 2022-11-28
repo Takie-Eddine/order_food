@@ -28,6 +28,8 @@
                             </ul>
                         </div>
                         @endif
+                        @include('alerts.errors')
+                        @include('alerts.success')
                         <form class="forms-sample" action="{{route('dashboard.persone.store')}}" method="POST">
                             @csrf
                             <div class="form-group row">

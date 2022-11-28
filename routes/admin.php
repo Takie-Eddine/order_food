@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CalculationController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ExpencesController;
 use App\Http\Controllers\Dashboard\FoodController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PersoneController;
@@ -44,6 +46,18 @@ Route::group(['middleware' => ['auth','verified'] , 'as'=>'dashboard.' , 'prefix
     Route::get('/order' ,[OrderController::class , 'index'])->name('order');
     Route::post('/order/store' ,[OrderController::class , 'store'])->name('order.store');
     Route::delete('/order/{id}' ,[OrderController::class , 'delete'])->name('order.delete');
-    Route::delete('/order/details/{id}' ,[OrderController::class , 'details'])->name('order.details');
+    Route::post('/order/details/{id}' ,[OrderController::class , 'details'])->name('order.details');
+    Route::get('/order/details/{id}' ,[OrderController::class , 'details'])->name('order.details');
+    Route::get('/order/person/show/{person}', [CalculationController::class , 'show'])->name('order.person.show');
+
+
+
+    Route::get('/expence' ,[ExpencesController::class , 'index'])->name('expences');
+    Route::get('/expence/create' ,[ExpencesController::class , 'create'])->name('expences.create');
+    Route::post('/expence/store' ,[ExpencesController::class , 'store'])->name('expences.store');
+    Route::post('/expence/{id}' ,[ExpencesController::class , 'edit'])->name('expences.edit');
+    Route::patch('/expence/{id}' ,[ExpencesController::class , 'update'])->name('expences.update');
+    Route::delete('/expence/{id}' ,[ExpencesController::class , 'delete'])->name('expences.delete');
+
 
 });

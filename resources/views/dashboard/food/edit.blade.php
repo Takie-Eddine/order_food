@@ -28,6 +28,9 @@
                             </ul>
                         </div>
                         @endif
+
+                        @include('alerts.errors')
+                        @include('alerts.success')
                         <form class="forms-sample" action="{{route('dashboard.food.update',$meal->id)}}" method="POST">
                             @method('patch')
                             @csrf

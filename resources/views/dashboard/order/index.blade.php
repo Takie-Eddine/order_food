@@ -35,21 +35,24 @@
                                         <td>{{$order->created_at}}</td>
                                         <td>{{$order->total}}</td>
                                         <td>
+                                            <form action="{{route('dashboard.order.details',$order->id)}}" method="POST">
+                                                @csrf
+                                                <button  class="btn btn-primary">Details</button>
+                                            </form>
+                                            <br>
                                             <form action="{{route('dashboard.order.delete',$order->id)}}" method="POST">
                                                 @method('delete')
                                                 @csrf
                                                 <button  class="btn btn-danger">Delete</button>
                                             </form>
-                                            <form action="{{route('dashboard.order.details',$order->id)}}" method="POST">
-                                                @csrf
-                                                <button  class="btn btn-info">Details</button>
-                                            </form>
+
 
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        {{$orders->withQueryString()->links()}}
                     </div>
                 </div>
             </div>
