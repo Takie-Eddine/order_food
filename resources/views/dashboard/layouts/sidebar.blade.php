@@ -18,12 +18,15 @@
             </a>
         </li>
 
+        @can('persone')
         <li class="nav-item">
             <a class="nav-link" href="{{route('dashboard.persone')}}">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Person</span>
             </a>
         </li>
+        @endcan
+
 
         {{-- <li class="nav-item">
             <a class="nav-link" href="{{route('dashboard.food')}}">
@@ -31,19 +34,41 @@
                 <span class="menu-title">Meal</span>
             </a>
         </li> --}}
+        @can('order')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard.order')}}">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title">Food Order</span>
+                </a>
+            </li>
+        @endcan
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('dashboard.order')}}">
-                <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Food Order</span>
-            </a>
-        </li>
+        @can('expences')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard.expences')}}">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title">Expenses</span>
+                </a>
+            </li>
+        @endcan
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('dashboard.expences')}}">
-                <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Expenses</span>
-            </a>
-        </li>
+        @can('users')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard.users')}}">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title">Users</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('permission')
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard.permission')}}">
+                    <i class="menu-icon typcn typcn-shopping-bag"></i>
+                    <span class="menu-title">Permissions</span>
+                </a>
+            </li>
+        @endcan
+
     </ul>
 </nav>

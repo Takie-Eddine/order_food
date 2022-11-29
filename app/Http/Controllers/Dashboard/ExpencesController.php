@@ -98,13 +98,13 @@ class ExpencesController extends Controller
 
 
 
-    public function edit($id){
+    // public function edit($id){
 
 
-        $expense = Expence_details::findOrFail($id);
+    //     $expense = Expence_details::findOrFail($id);
 
-        return view('dashboard.expences.edit',compact('expense'));
-    }
+    //     return view('dashboard.expences.edit',compact('expense'));
+    // }
 
 
 }
