@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth','verified'] , 'as'=>'dashboard.' , 'prefix
     Route::get('/expence' ,[ExpencesController::class , 'index'])->middleware('can:expences')->name('expences');
     Route::get('/expence/create' ,[ExpencesController::class , 'create'])->middleware('can:expences_create')->name('expences.create');
     Route::post('/expence/store' ,[ExpencesController::class , 'store'])->middleware('can:expences_store')->name('expences.store');
+    Route::post('/export' , [ExpencesController::class , 'export'])->name('expences.export');
     // Route::post('/expence/{id}' ,[ExpencesController::class , 'edit'])->middleware('can:expences_edit')->name('expences.edit');
     // Route::patch('/expence/{id}' ,[ExpencesController::class , 'update'])->middleware('can:expences_update')->name('expences.update');
     // Route::delete('/expence/{id}' ,[ExpencesController::class , 'delete'])->middleware('can:expences_delete')->name('expences.delete');
@@ -77,6 +78,9 @@ Route::group(['middleware' => ['auth','verified'] , 'as'=>'dashboard.' , 'prefix
     // Route::post('/permission/{id}' ,[PermissionController::class , 'edit'])->middleware('can:permission')->name('permission.edit');
     // Route::patch('/permission/{id}' ,[PermissionController::class , 'update'])->middleware('can:permission')->name('permission.update');
     Route::delete('/permission/{id}' ,[PermissionController::class , 'delete'])->name('permission.delete');
+
+
+
 
 
 

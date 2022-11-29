@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\ExpencesExport;
 use App\Http\Controllers\Controller;
 use App\Models\Expence;
 use App\Models\Expence_details;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpencesController extends Controller
 {
@@ -14,8 +17,25 @@ class ExpencesController extends Controller
     public function index(){
 
         $request = request();
-
         $expences = Expence_details::filter($request->query())->paginate();
+
+
+        switch ($request->input('action')) {
+            case 'filter':
+                    $expences = Expence_details::filter($request->query())->paginate();
+                break;
+
+            case 'export':
+                    $request->validate([
+                        'date_started' => ['nullable','date'],
+                        'date_endded' => ['nullable','date'],
+                    ]);
+                    $from = Carbon::parse($request->date_started)->toDateTimeString();
+                    $to = Carbon::parse( $request->date_endded)->toDateTimeString();
+
+                    return Excel::download(new ExpencesExport($from,$to),'Expenses.ods');
+                break;
+        }
 
 
         return view('dashboard.expences.index',compact('expences'));
@@ -106,5 +126,11 @@ class ExpencesController extends Controller
     //     return view('dashboard.expences.edit',compact('expense'));
     // }
 
+
+    public function export(Request $request){
+
+
+
+    }
 
 }

@@ -35,10 +35,14 @@
                                     <input type="date" class="form-control inpust-sm" name="date_endded" value="{{request('date_endded')}}">
                                 </div >
                                 <div class="form-group mb-4 mx-2">
-                                    <button class="btn btn-info"  value="filter" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Filter</button>
+                                    <button class="btn btn-info" name="action" value="filter" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Filter</button>
+                                </div>
+                                <div class="form-group mb-4 mx-2">
+                                    <button class="btn btn-success" name="action"  value="export" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Export</button>
                                 </div>
                             </div>
                         </form>
+
                         <table class="table">
                             <thead>
                                 <tr>
