@@ -54,14 +54,14 @@
                                         <td><a href="{{route('dashboard.order.details',$order->order_id)}}">{{$order->order_id}}</a></td>
                                         <td>{{$order->reference}}</td>
                                         <td>{{$order->food}}</td>
-                                        <td>{{$order->price}}</td>
+                                        <td>{{$order->price}} TL</td>
                                     </tr>
                                 @endforeach
                                 <tr>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>Total : {{$person_orders_total->total}}</td>
+                                    <td>Total : {{$person_orders_total->total}} TL</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -72,18 +72,6 @@
 
                         <br>
                         <br>
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <h5>Error Occured!</h5>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{$error}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        @endif
-
-
 
                     </div>
                 </div>

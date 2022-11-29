@@ -50,7 +50,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <div class="form-radio form-radio-flat">
-                                                <label class="form-check-label">{{$order_detail->price}}</label>
+                                                <label class="form-check-label">{{$order_detail->price}} TL</label>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-radio form-radio-flat">
-                                            <label class="form-check-label">Total : {{$order->total}}</label>
+                                            <label class="form-check-label">Total : {{$order->total}} TL</label>
                                         </div>
                                     </div>
                                 </div>

@@ -59,9 +59,9 @@
                                         <td>{{$expence->created_at}}</td>
                                         <td>{{$expence->description}}</td>
                                         <td>{{$expence->type}}</td>
-                                        <td>{{$expence->price}}</td>
-                                        <td>{{$expence->old}}</td>
-                                        <td>{{$expence->total}}</td>
+                                        <td>{{$expence->price}} TL</td>
+                                        <td>{{$expence->old}} TL</td>
+                                        <td>{{$expence->total}} TL</td>
                                         {{-- <td>
                                             <form action="{{route('dashboard.expences.delete',$expence->id)}}" method="POST">
                                                 @method('delete')

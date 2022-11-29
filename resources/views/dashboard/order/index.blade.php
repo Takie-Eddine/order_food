@@ -50,7 +50,7 @@
                                     <tr>
                                         <td>{{$order->id}}</td>
                                         <td>{{$order->created_at}}</td>
-                                        <td>{{$order->total}}</td>
+                                        <td>{{$order->total}} TL</td>
                                         <td>
                                             <form action="{{route('dashboard.order.details',$order->id)}}" method="POST">
                                                 @csrf
@@ -71,7 +71,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>Total : {{$total->total}}</td>
+                                    <td>Total : {{$total->total}} TL</td>
                                 </tr>
                             </tbody>
                         </table>
