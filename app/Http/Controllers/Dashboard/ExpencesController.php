@@ -72,7 +72,7 @@ class ExpencesController extends Controller
                         'price' => $request->price,
                         'description' => $request->description,
                         'old'=> 0,
-                        'total'=>($expense->total+$request->price),
+                        'total'=>(0+$request->price),
                         'created_at' => $request->date,
                     ]);
                 }else {
@@ -81,7 +81,7 @@ class ExpencesController extends Controller
                         'price' => $request->price,
                         'description' => $request->description,
                         'old'=> 0,
-                        'total'=> ($expense->total-$request->price),
+                        'total'=> (0-$request->price),
                         'created_at' => $request->date,
                     ]);
                 }
