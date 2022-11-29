@@ -66,14 +66,25 @@ class ExpencesController extends Controller
                     ]);
                 }
             }else{
-                Expence_details::create([
-                    'type' => $request->type,
-                    'price' => $request->price,
-                    'description' => $request->description,
-                    'old'=> 0,
-                    'total'=>$request->price,
-                    'created_at' => $request->date,
-                ]);
+                if ($request->type === 'cash_in') {
+                    Expence_details::create([
+                        'type' => $request->type,
+                        'price' => $request->price,
+                        'description' => $request->description,
+                        'old'=> 0,
+                        'total'=>($expense->total+$request->price),
+                        'created_at' => $request->date,
+                    ]);
+                }else {
+                    Expence_details::create([
+                        'type' => $request->type,
+                        'price' => $request->price,
+                        'description' => $request->description,
+                        'old'=> 0,
+                        'total'=> ($expense->total-$request->price),
+                        'created_at' => $request->date,
+                    ]);
+                }
             }
 
 

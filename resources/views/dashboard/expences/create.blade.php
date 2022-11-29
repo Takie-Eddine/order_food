@@ -44,7 +44,7 @@
                             <div class="form-group row">
                                 <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Price</label>
                                 <div class="col-sm-9">
-                                <input type="number" class="form-control" id="exampleInputPassword2" placeholder="Price" name="price" value="{{old('price')}}">
+                                <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Price" name="price" value="{{old('price')}}">
                                 </div>
                             </div>
                             <div class="form-group row">
