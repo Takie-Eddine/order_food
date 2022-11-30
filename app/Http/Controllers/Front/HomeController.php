@@ -30,17 +30,17 @@ class HomeController extends Controller
 
     public function store(Request $request){
 
+        $request->validate([
+            //'refrence' => 'required',
+            'food' => 'required',
+            'date' => 'required|date',
+            'persone' => 'nullable|array|min:1|exists:persones,name',
+            'price' => 'required|integer',
+            //'delivery' => 'nullable|integer',
+
+        ]);
+
         try{
-            $request->validate([
-                //'refrence' => 'required',
-                'food' => 'required',
-                'date' => 'required|date',
-                'persone' => 'nullable|array|min:1|exists:persones,name',
-                'price' => 'required|integer',
-                //'delivery' => 'nullable|integer',
-
-            ]);
-
             $request->merge(['refrence' => Str::slug($request->date)]);
 
             DB::beginTransaction();
