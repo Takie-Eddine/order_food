@@ -34,7 +34,7 @@ class HomeController extends Controller
             //'refrence' => 'required',
             'food' => 'required',
             'date' => 'required|date',
-            'persone' => 'nullable|array|min:1|exists:persones,name',
+            'persone' => 'required|array|min:1|exists:persones,name',
             'price' => 'required|integer',
             //'delivery' => 'nullable|integer',
 
