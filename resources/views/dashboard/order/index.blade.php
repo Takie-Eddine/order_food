@@ -11,9 +11,30 @@
 
 <div class="main-panel">
     <div class="content-wrapper">
+
         <div class="row">
+            <div class="col-md-3 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="d-flex">
+                                    <div class="wrapper">
+                                        <h3 class="mb-0 font-weight-semibold"> {{$monthly_tolal->total}} TL</h3>
+                                        <h5 class="mb-0 font-weight-medium text-primary"> Total This Month </h5>
+                                    </div>
+                                    {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
+                                        <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+        <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -31,8 +52,11 @@
                                     <input type="date" class="form-control inpust-sm" name="date_endded" value="{{request('date_endded')}}">
                                 </div >
                                 <div class="form-group mb-4 mx-2">
-                                    <button class="btn btn-info"  value="filter" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Filter</button>
+                                    <button class="btn btn-info" name="action" value="filter" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Filter</button>
                                 </div>
+                                {{-- <div class="form-group mb-4 mx-2">
+                                    <button class="btn btn-dark" name="action" value="archive" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>archive</button>
+                                </div> --}}
                             </div>
                         </form>
 

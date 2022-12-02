@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth','verified'] , 'as'=>'dashboard.' , 'prefix
     Route::post('/order/details/{id}' ,[OrderController::class , 'details'])->middleware('can:order_details')->name('order.details');
     Route::get('/order/details/{id}' ,[OrderController::class , 'details'])->middleware('can:order_details')->name('order.details');
     Route::get('/order/person/show/{person}', [CalculationController::class , 'show'])->middleware('can:order_show')->name('order.person.show');
+    Route::delete('/order/archive' ,[OrderController::class , 'archive'])->name('order.archive');
 
 
 

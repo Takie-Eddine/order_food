@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDelivery;
 use App\Models\OrderDetails;
+use Carbon\Carbon;
 use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -19,8 +20,9 @@ class OrderController extends Controller
 
         $orders = Order::filter($request->query())->paginate(7);
         $total = Order::selectRaw('SUM(total) as total')->filter($request->query())->first();
+        $monthly_tolal = Order::selectRaw('SUM(total) as total')->whereMonth('created_at',Carbon::now()->month())->first();
 
-        return view('dashboard.order.index',compact('orders','total'));
+        return view('dashboard.order.index',compact('orders','total','monthly_tolal'));
     }
 
 
@@ -63,4 +65,18 @@ class OrderController extends Controller
         }
 
     }
+
+
+    public function archive(){
+
+        $archives = Order::whereMonth('created_at',Carbon::now()->subMonth()->month)->get();
+
+        foreach ($archives as $archive) {
+            $archive->delete();
+        }
+
+        return redirect()->back()->with(['success' =>'Order Of Last Month Archived']);
+    }
+
+
 }
