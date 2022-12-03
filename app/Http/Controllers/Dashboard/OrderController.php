@@ -21,8 +21,9 @@ class OrderController extends Controller
         $orders = Order::filter($request->query())->paginate(7);
         $total = Order::selectRaw('SUM(total) as total')->filter($request->query())->first();
         $monthly_tolal = Order::selectRaw('SUM(total) as total')->whereMonth('created_at',Carbon::now()->month())->first();
+        $last_month = Order::whereMonth('created_at',Carbon::now()->subMonth()->month)->get();
 
-        return view('dashboard.order.index',compact('orders','total','monthly_tolal'));
+        return view('dashboard.order.index',compact('orders','total','monthly_tolal','last_month'));
     }
 
 
