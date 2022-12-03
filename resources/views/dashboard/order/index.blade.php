@@ -17,20 +17,22 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12">
+                            <div class="col-lg-6 col-md-6">
                                 <div class="d-flex">
                                     <div class="wrapper">
                                         <h3 class="mb-0 font-weight-semibold"> {{$monthly_tolal->total}} TL</h3>
-                                        <h5 class="mb-0 font-weight-medium text-primary"> Total This Month </h5>
+                                        <h5 class="mb-0 font-weight-medium text-primary">  This Month </h5>
                                     </div>
                                     {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
                                         <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
                                     </div> --}}
                                 </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
                                 <div class="d-flex">
                                     <div class="wrapper">
                                         <h3 class="mb-0 font-weight-semibold"> {{$last_month->total}} TL</h3>
-                                        <h5 class="mb-0 font-weight-medium text-primary"> Total Last Month </h5>
+                                        <h5 class="mb-0 font-weight-medium text-primary">  Last Month </h5>
                                     </div>
                                     {{-- <div class="wrapper my-auto ml-auto ml-lg-4">
                                         <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
