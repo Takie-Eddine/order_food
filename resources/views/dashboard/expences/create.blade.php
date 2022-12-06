@@ -36,8 +36,9 @@
                                 <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Type</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" name="type" id="">
-                                        <option value="cash_in">Cash in</option>
-                                        <option value="cash_out">Cash out</option>
+                                        <option value="">choose</option>
+                                        <option value="cash_in" class="bg-success">Cash in</option>
+                                        <option value="cash_out" class="bg-danger">Cash out</option>
                                     </select>
                                 </div>
                             </div>

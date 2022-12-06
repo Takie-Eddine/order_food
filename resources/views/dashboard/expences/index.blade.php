@@ -62,7 +62,11 @@
                                         <td>{{$expence->id}}</td>
                                         <td>{{$expence->created_at}}</td>
                                         <td>{{$expence->description}}</td>
-                                        <td>{{$expence->type}}</td>
+                                        @if ($expence->type == 'cash_in')
+                                            <td class="bg-success">{{$expence->type}}</td>
+                                        @else
+                                            <td class="bg-danger">{{$expence->type}}</td>
+                                        @endif
                                         <td>{{$expence->price}} TL</td>
                                         <td>{{$expence->old}} TL</td>
                                         <td>{{$expence->total}} TL</td>
