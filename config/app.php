@@ -186,6 +186,7 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        browner12\helpers\HelperServiceProvider::class,
         /*
          * Application Service Providers...
          */

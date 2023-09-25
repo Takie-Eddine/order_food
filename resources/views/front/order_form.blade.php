@@ -55,55 +55,85 @@
                                         @csrf
 										<div class="row">
 
-                                            <div class="col-md-12">
-												<div class="form-group">
-													<label class="label" for="name">التاريخ</label>
-													<input type="date" class="form-control" name="date" id="date" placeholder="" value ="{{old('date')}}">
-												</div>
-											</div>
+                                            <!--begin::Repeater-->
+                                                <div id="kt_docs_repeater_nested">
+                                                    <!--begin::Form group-->
+                                                    <div class="form-group">
+                                                        <div data-repeater-list="day">
+                                                            <div data-repeater-item>
+                                                                <div class="form-group row mb-12">
+                                                                    <div class="col-md-4">
+                                                                        <label class="form-label">التاريخ</label>
+                                                                        <input type="date" class="form-control " class="form-control" name="date"  value ="{{old('date')}}" placeholder="Pick Date" required/>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="inner-repeater">
+                                                                            <div data-repeater-list="meal" class="mb-5">
+                                                                                <div data-repeater-item>
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">الوجبة</label>
+                                                                                        <div class="input-group pb-3">
+                                                                                            <input type="text" class="form-control" name="food" placeholder=" Enter Food" value ="{{old('food')}}" required />
+                                                                                            <button class="btn btn-outline-danger" data-repeater-delete type="button">
+                                                                                                <i class="fa fa-trash-o"> </i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label">الاشخاص</label>
+                                                                                        <div>
+                                                                                            <select class="form-control select " id="select-multi"  data-placeholder="الاشخاص"  name="persone" required>
+                                                                                                <option value=""></option>
+                                                                                                @forelse ($persones as $persone)
+                                                                                                    <option value="{{$persone->name}}">{{$persone->name}}</option>
+                                                                                                @empty
+                                                                                                @endforelse
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="label" for="email">السعر</label>
+                                                                                        <input type="text" class="form-control" name="price" id="" placeholder="Enter Price" value = "{{old('price')}}" required>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <button class="btn btn-outline-secondary" data-repeater-create type="button">
+                                                                                <i class="ki-duotone ki-plus fs-5"></i>
+                                                                                اضف اشخاص
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <a href="javascript:;" data-repeater-delete class="btn btn-outline-danger">
+                                                                            <i class="fa fa-trash-o"> </i>
+                                                                            حذف السطر
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!--end::Form group-->
 
-                                            <div class="col-md-12">
-												<div class="form-group">
-													<label class="label" for="name">رقم الطلب</label>
-													<input type="text" class="form-control" name="refrence" id="refrence" placeholder="" value ="{{old('refrence')}}">
-												</div>
-											</div>
+                                                    <!--begin::Form group-->
+                                                    <div class="form-group">
+                                                        <a href="javascript:;" data-repeater-create class="btn btn-outline-primary">
+                                                            <i class="fa fa-plus-square-o"></i>
+                                                            اضف سطر
+                                                        </a>
+                                                    </div>
+                                                    <!--end::Form group-->
+                                                </div>
+                                                <!--end::Repeater-->
 
                                             <div class="col-md-12 row" >
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label class="label" for="food">الوجبة </label>
-                                                        <input type="text" class="form-control" name="food" id="food" placeholder="" value ="{{old('food')}}">
+                                                        <label class="label" for="email">صورة الفاتورة</label>
+                                                        <input type="file" class="form-control" name="image" required >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="label" for="employe">الاشخاص </label>
-                                                        <select class="form-control select2" multiple="multiple"  name="persone[]">
-                                                            <option value="">Choose</option>
-                                                            @isset($persones)
-                                                                @foreach ($persones as $persones)
-                                                                    <option value="{{$persones->name}}">{{$persones->name}}</option>
-                                                                @endforeach
-                                                            @endisset
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="label" for="email">السعر</label>
-                                                        <input type="text" class="form-control" name="price" id="" placeholder="" value = "{{old('price')}}">
-                                                    </div>
-                                                </div>
-
-                                                {{-- <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="label" for="email">التوصيل</label>
-                                                        <input type="text" class="form-control" name="delivery" id="" placeholder="" value = "{{old('delivery')}}">
-                                                    </div>
-                                                </div> --}}
                                             </div>
-
 
 											<div class="col-md-12">
 												<div class="form-group">
@@ -170,55 +200,77 @@
         <script src="{{asset('assets/persone/js/jquery.validate.min.js')}}"></script>
         <script src="{{asset('assets/persone/js/main.js')}}"></script>
         <script src="{{asset('assets/select2/js/select2.full.min.js')}}"></script>
+        <script src="{{asset('assets/assets/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
         <script>
-             $(function(){
-            function matchStart(params, data) {
-                // If there are no search terms, return all of the data
-                if ($.trim(params.term) === '') {
-                    return data;
-                }
+            $(function(){
+                function matchStart(params, data) {
 
-                // Skip if there is no 'children' property
-                if (typeof data.children === 'undefined') {
+                    if ($.trim(params.term) === '') {
+                        return data;
+                    }
+
+
+                    if (typeof data.children === 'undefined') {
+                        return null;
+                    }
+
+
+                    var filteredChildren = [];
+                    $.each(data.children, function (idx, child) {
+                        if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
+                            filteredChildren.push(child);
+                        }
+                    });
+
+
+                    if (filteredChildren.length) {
+                        var modifiedData = $.extend({}, data, true);
+                        modifiedData.children = filteredChildren;
+
+                        return modifiedData;
+                    }
+
                     return null;
                 }
 
-                // `data.children` contains the actual options that we are matching against
-                var filteredChildren = [];
-                $.each(data.children, function (idx, child) {
-                    if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) == 0) {
-                        filteredChildren.push(child);
-                    }
+                $(".select2").select2({
+                    tags: true,
+                    closeOnSelect: false,
+                    minimumResultsForSearch: Infinity,
+                    matcher: matchStart
                 });
 
-                // If we matched any of the timezone group's children, then set the matched children on the group
-                // and return the group object
-                if (filteredChildren.length) {
-                    var modifiedData = $.extend({}, data, true);
-                    modifiedData.children = filteredChildren;
-
-                    // You can return modified objects from here
-                    // This includes matching the `children` how you want in nested data sets
-                    return modifiedData;
-                }
-
-                // Return `null` if the term should not be displayed
-                return null;
-            }
-
-            $(".select2").select2({
-                tags: true,
-                closeOnSelect: false,
-                minimumResultsForSearch: Infinity,
-                matcher: matchStart
             });
-
-
-
-
-        });
         </script>
 
+        <script>
+
+        </script>
+
+        <script>
+            $('#kt_docs_repeater_nested').repeater({
+                repeaters: [{
+                    selector: '.inner-repeater',
+                    show: function () {
+                        $(this).slideDown();
+                    },
+
+                    hide: function (deleteElement) {
+                        $(this).slideUp(deleteElement);
+                    }
+                }],
+
+                show: function () {
+                    $(this).slideDown();
+
+                },
+
+                hide: function (deleteElement) {
+                    $(this).slideUp(deleteElement);
+                }
+
+            });
+        </script>
 
 
 	</body>

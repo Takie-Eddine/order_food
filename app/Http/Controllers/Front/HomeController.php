@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -31,76 +32,60 @@ class HomeController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            //'refrence' => 'required',
-            'food' => 'required',
-            'date' => 'required|date',
-            'persone' => 'required|array|min:1|exists:persones,name',
-            'price' => 'required|integer',
-            //'delivery' => 'nullable|integer',
-
+            'day' => [
+                '*.date'=> ['required','date'],
+                '*.meal'=> [
+                                '*.food' => ['required','string'],
+                                '*.persone' => ['required',Rule::exists('persones','name')],
+                                '*.price' => ['required','integer'],
+                                ],
+                            ],
+            'image' => ['required','image'],
         ]);
 
+        DB::beginTransaction();
+
         try{
-            $request->merge(['refrence' => Str::slug($request->date)]);
 
-            DB::beginTransaction();
+            $fileName = "";
+        if ($request->has('image')) {
 
-            if ($request->persone) {
-                $count = count($request->persone);
-            }else{
-                $count = 1;
-            }
+            $fileName = uploadImage('bills', $request->image);
+        }
 
+            $total = 0 ;
 
-            $ordertest = OrderDetails::where( 'reference' , $request->refrence )->first();
+            $order = Order::create([
+                'total' => 0,
+                'image' => $fileName,
+            ]);
 
-                if (!$ordertest) {
+            foreach ($request->day as $day => $value) {
 
-                    $order = Order::create([
-                        'total' => 0,
+                foreach ($value['meal'] as $meal=>$key) {
+                    $orderdetails = OrderDetails::create([
+                        'order_id' => $order->id,
+                        'reference' => $value['date'],
+                        'food' => $key['food'],
+                        'persone' => $key['persone'],
+                        'price' => $key['price'],
                     ]);
-
-                    foreach ($request->persone as $value) {
-                        $order_details = OrderDetails::create([
-                            'order_id' => $order->id,
-                            'reference' => $request->refrence,
-                            'food' => $request->food,
-                            'created_at' => $request->date,
-                            'price' => ($request->price/$count),
-                            'persone' => $value,
-                        ]);
-                    }
-
-                    $order->update([
-                        'total' => ($request->price),
-                    ]);
-
-                }else{
-                    foreach ($request->persone as $value) {
-                        $order_details = OrderDetails::create([
-                            'order_id' => $ordertest->order_id,
-                            'reference' => $request->refrence,
-                            'food' => $request->food,
-                            'created_at' => $request->date,
-                            'price' => ($request->price/$count),
-                            'persone' => $value,
-                        ]);
-
-                        $order_up = Order::find($ordertest->order_id);
-                        $order_up->total = $order_up->total+$request->price/$count;
-                        $order_up->save();
-
-                    }
-
+                    $total = $total + $key['price'];
                 }
 
-            DB::commit();
+            }
 
+            $order->update([
+                'total' => $total,
+            ]);
+
+            DB::commit();
             return redirect()->back()->with(['success' => 'Order Registred']);
 
-        }catch(Exception $ex){
+        }catch(Exception){
+            return redirect()->back()->with(['error' => 'Ops !']);
             DB::rollback();
-            return redirect()->back()->with(['errors' => 'There is problem contact the smartest one ']);
+
         }
     }
 
