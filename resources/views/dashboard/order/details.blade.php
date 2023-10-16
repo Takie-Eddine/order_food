@@ -71,6 +71,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-radio form-radio-flat">
+                                            @if ($order->image)
+                                                <img src="{{asset('assets/bills/'.$order->image)}}" alt="bill">
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

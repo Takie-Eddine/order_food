@@ -45,7 +45,7 @@ return [
         ],
         'bills' => [
             'driver' => 'local',
-            'root' => public_path('assets/bills'),
+            'root' => public_path('/../../public_html/foodRecords.life-nvst.com/assets/bills'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
