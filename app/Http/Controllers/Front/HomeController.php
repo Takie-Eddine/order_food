@@ -45,7 +45,7 @@ class HomeController extends Controller
 
         DB::beginTransaction();
 
-        try{
+        // try{
 
             $fileName = "";
         if ($request->has('image')) {
@@ -82,11 +82,11 @@ class HomeController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => 'Order Registred']);
 
-        }catch(Exception){
-            return redirect()->back()->with(['error' => 'Ops !']);
-            DB::rollback();
+        // }catch(Exception){
+        //     return redirect()->back()->with(['error' => 'Ops !']);
+        //     DB::rollback();
 
-        }
+        // }
     }
 
 
